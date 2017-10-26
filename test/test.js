@@ -110,3 +110,27 @@ describe('killSession()', function () {
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
+
+describe('getMyProfiles()', function () {
+    it('get my profiles successfully', sinonTest(() => {
+        const client = new GlpiRestClient(config.apirest)
+        const stub = sinon.stub(client, '_request')
+
+        const requestData = {
+            hostname: 'dev.flyve.org',
+            port: 443,
+            path: '/glpi/apirest.php/getMyProfiles',
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session-Token': 'exampleUserToken',
+                'App-Token': ''
+            }
+        }
+        const bodyString = ''
+
+        client.sessionToken = 'exampleUserToken'
+        client.getMyProfiles()
+        sinon.assert.calledWith(stub, requestData, bodyString)
+    }))
+})
