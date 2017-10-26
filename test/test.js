@@ -451,3 +451,27 @@ describe('changeActiveEntities()', function () {
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
+
+describe('resetPasswordRequest()', function () {
+    it('correct data sent to the request', sinonTest(() => {
+        const client = new GlpiRestClient(config.apirest)
+        const stub = sinon.stub(client, '_request')
+
+        const requestData = {
+            hostname: 'dev.flyve.org',
+            port: 443,
+            path: '/glpi/apirest.php/lostPassword',
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session-Token': '',
+                'App-Token': '',
+                'Content-Length': 24
+            }
+        }
+        const bodyString = '{"email":"exampleEmail"}'
+
+        client.resetPasswordRequest('exampleEmail')
+        sinon.assert.calledWith(stub, requestData, bodyString)
+    }))
+})
