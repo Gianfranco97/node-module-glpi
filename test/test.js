@@ -401,3 +401,28 @@ describe('deleteItem()', function () {
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
+
+describe('changeActiveProfile()', function () {
+    it('correct data sent to the request', sinonTest(() => {
+        const client = new GlpiRestClient(config.apirest)
+        const stub = sinon.stub(client, '_request')
+
+        const requestData = {
+            hostname: 'dev.flyve.org',
+            port: 443,
+            path: '/glpi/apirest.php/changeActiveProfile',
+            method: 'POTS',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session-Token': 'exampleUserToken',
+                'App-Token': '',
+                'Content-Length': 18
+            }
+        }
+        const bodyString = '{"profiles_id":40}'
+
+        client.sessionToken = 'exampleUserToken'
+        client.changeActiveProfile(40)
+        sinon.assert.calledWith(stub, requestData, bodyString)
+    }))
+})
