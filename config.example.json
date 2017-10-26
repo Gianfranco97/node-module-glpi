@@ -1,10 +1,10 @@
 {
-    "apirest": "http://example.com/glpi/apirest.php",
+    "apirest": "https://dev.flyve.org/glpi/apirest.php",
     "user": {
         "name": "exampleName",
         "email": "exampleEmail",
         "password": "examplePassword",
         "userToken": "exampleUserToken"
     },
-    "appToken": "exampleAppToken"
+    "appToken": ""
 }
