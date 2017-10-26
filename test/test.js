@@ -376,3 +376,28 @@ describe('updateItem()', function () {
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
+
+describe('deleteItem()', function () {
+    it('correct data sent to the request', sinonTest(() => {
+        const client = new GlpiRestClient(config.apirest)
+        const stub = sinon.stub(client, '_request')
+
+        const requestData = {
+            hostname: 'dev.flyve.org',
+            port: 443,
+            path: '/glpi/apirest.php/UserEmail',
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session-Token': 'exampleUserToken',
+                'App-Token': '',
+                'Content-Length': 63
+            }
+        }
+        const bodyString = '{"input":{"id":160,"users_id":40,"email":"example2@email.com"}}'
+
+        client.sessionToken = 'exampleUserToken'
+        client.deleteItem(itemtype.UserEmail, null, {id: 160, users_id: 40, email: 'example2@email.com'})
+        sinon.assert.calledWith(stub, requestData, bodyString)
+    }))
+})
