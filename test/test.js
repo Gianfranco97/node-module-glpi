@@ -28,7 +28,7 @@ const sinonTestFactory = require('sinon-test')
 const sinonTest = sinonTestFactory(sinon)
 
 const GlpiRestClient = require('../lib/restclient')
-const config = require('../config.example.json')
+const config = require('../config.json')
 const itemtype = require('../lib/itemtype')
 
 const paths = [
