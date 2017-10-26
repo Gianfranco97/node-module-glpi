@@ -63,3 +63,26 @@ describe('initSessionByCredentials()', function () {
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
+
+describe('initSessionByUserToken()', function () {
+    it('correct data sent to the request', sinonTest(() => {
+        const client = new GlpiRestClient(config.apirest)
+        const stub = sinon.stub(client, '_request')
+
+        const requestData = {
+            hostname: 'dev.flyve.org',
+            port: 443,
+            path: '/glpi/apirest.php/initSession',
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session-Token': '',
+                'App-Token': '',
+                Authorization: 'user_token exampleUserToken'
+            }
+        }
+        const bodyString = ''
+        client.initSessionByUserToken('exampleUserToken')
+        sinon.assert.calledWith(stub, requestData, bodyString)
+    }))
+})
