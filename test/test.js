@@ -303,3 +303,26 @@ describe('getAnItem()', function () {
     }))
 })
 
+describe('getSubItems()', function () {
+    it('correct data sent to the request', sinonTest(() => {
+        const client = new GlpiRestClient(config.apirest)
+        const stub = sinon.stub(client, '_request')
+
+        const requestData = {
+            hostname: 'dev.flyve.org',
+            port: 443,
+            path: '/glpi/apirest.php/User/40/UserEmail',
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session-Token': 'exampleUserToken',
+                'App-Token': ''
+            }
+        }
+        const bodyString = ''
+
+        client.sessionToken = 'exampleUserToken'
+        client.getSubItems(itemtype.User, 40, itemtype.UserEmail)
+        sinon.assert.calledWith(stub, requestData, bodyString)
+    }))
+})
