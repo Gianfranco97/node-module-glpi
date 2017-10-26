@@ -158,3 +158,27 @@ describe('getActiveProfile()', function () {
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
+
+describe('getMyEntities()', function () {
+    it('correct data sent to the request', sinonTest(() => {
+        const client = new GlpiRestClient(config.apirest)
+        const stub = sinon.stub(client, '_request')
+
+        const requestData = {
+            hostname: 'dev.flyve.org',
+            port: 443,
+            path: '/glpi/apirest.php/getMyEntities',
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session-Token': 'exampleUserToken',
+                'App-Token': ''
+            }
+        }
+        const bodyString = ''
+
+        client.sessionToken = 'exampleUserToken'
+        client.getMyEntities()
+        sinon.assert.calledWith(stub, requestData, bodyString)
+    }))
+})
