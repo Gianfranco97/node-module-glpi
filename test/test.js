@@ -134,3 +134,27 @@ describe('getMyProfiles()', function () {
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
+
+describe('getActiveProfile()', function () {
+    it('correct data sent to the request', sinonTest(() => {
+        const client = new GlpiRestClient(config.apirest)
+        const stub = sinon.stub(client, '_request')
+
+        const requestData = {
+            hostname: 'dev.flyve.org',
+            port: 443,
+            path: '/glpi/apirest.php/getActiveProfile',
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session-Token': 'exampleUserToken',
+                'App-Token': ''
+            }
+        }
+        const bodyString = ''
+
+        client.sessionToken = 'exampleUserToken'
+        client.getActiveProfile()
+        sinon.assert.calledWith(stub, requestData, bodyString)
+    }))
+})
