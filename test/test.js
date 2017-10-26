@@ -230,3 +230,27 @@ describe('getFullSession()', function () {
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
+
+describe('getGlpiConfig()', function () {
+    it('correct data sent to the request', sinonTest(() => {
+        const client = new GlpiRestClient(config.apirest)
+        const stub = sinon.stub(client, '_request')
+
+        const requestData = {
+            hostname: 'dev.flyve.org',
+            port: 443,
+            path: '/glpi/apirest.php/getGlpiConfig',
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session-Token': 'exampleUserToken',
+                'App-Token': ''
+            }
+        }
+        const bodyString = ''
+
+        client.sessionToken = 'exampleUserToken'
+        client.getGlpiConfig()
+        sinon.assert.calledWith(stub, requestData, bodyString)
+    }))
+})
