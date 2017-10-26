@@ -426,3 +426,28 @@ describe('changeActiveProfile()', function () {
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
+
+describe('changeActiveEntities()', function () {
+    it('correct data sent to the request', sinonTest(() => {
+        const client = new GlpiRestClient(config.apirest)
+        const stub = sinon.stub(client, '_request')
+
+        const requestData = {
+            hostname: 'dev.flyve.org',
+            port: 443,
+            path: '/glpi/apirest.php/changeActiveEntities',
+            method: 'POTS',
+            headers: {
+                'Content-Type': 'application/json',
+                'Session-Token': 'exampleUserToken',
+                'App-Token': '',
+                'Content-Length': 21
+            }
+        }
+        const bodyString = '{"is_recursive":true}'
+
+        client.sessionToken = 'exampleUserToken'
+        client.changeActiveEntities(null, true)
+        sinon.assert.calledWith(stub, requestData, bodyString)
+    }))
+})
