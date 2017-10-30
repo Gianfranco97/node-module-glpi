@@ -24,16 +24,24 @@
 
 const GlpiRestClient = require('../../lib/restclient')
 const config = require('../../config.json')
-const itemtype = require('../../lib/itemtype');
+const itemtype = require('../../lib/itemtype')
 
-(async () => {
-    try {
-        const client = new GlpiRestClient(config.apirest)
-        await client.initSessionByCredentials(config.user.name, config.user.password, config.appToken)
-        const NewItem = await client.addItem(itemtype.UserEmail, [{users_id: 40, email: 'example@email.com'}, {users_id: 40, email: 'example2@email.com'}])
-        console.log(NewItem)
-        await client.killSession()
-    } catch (err) {
+const client = new GlpiRestClient(config.apirest)
+
+client.initSessionByCredentials(config.user.name, config.user.password, config.appToken)
+    .then((res) => {
+        client.addItems(itemtype.UserEmail, {users_id: 40, email: 'example@email.com'})
+            .then((res2) => {
+                console.log(res2)
+                client.killSession()
+                    .catch((err3) => {
+                        console.log(err3)
+                    })
+            })
+            .catch((err2) => {
+                console.log(err2)
+            })
+    })
+    .catch((err) => {
         console.log(err)
-    }
-})()
+    })

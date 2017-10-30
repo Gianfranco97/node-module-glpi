@@ -25,22 +25,22 @@
 const GlpiRestClient = require('../../lib/restclient')
 const config = require('../../config.json')
 const itemtype = require('../../lib/itemtype')
-const GetAnItemQuery = require('../../lib/getAnItemQuery')
 
 const client = new GlpiRestClient(config.apirest)
 
-let query = new GetAnItemQuery()
-query.with_networkports = true
-query.with_infocoms = true
-query.with_contracts = true
-query.with_documents = true
-
-client.initSessionByCredentials(config.user.name, config.user.password)
+client.initSessionByCredentials(config.user.name, config.user.password, config.appToken)
     .then((res) => {
-        client.getAnItem(itemtype.User, 40, query.createQueryObject())
+        client.addItems(itemtype.UserEmail, {users_id: 37, email: 'example@email.com'})
             .then((res2) => {
                 console.log(res2)
-                client.killSession()
+                client.updateItems(itemtype.UserEmail, null, {id: res2.data.id, users_id: 37, email: 'example2@email.com'})
+                    .then((res3) => {
+                        console.log(res3)
+                        client.killSession()
+                            .catch((err4) => {
+                                console.log(err4)
+                            })
+                    })
                     .catch((err3) => {
                         console.log(err3)
                     })

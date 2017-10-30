@@ -23,13 +23,16 @@
 *  -------------------------------------------------------------------- */
 
 const GlpiRestClient = require('../../lib/restclient')
-const config = require('../../config.json');
+const config = require('../../config.json')
+const itemtype = require('../../lib/itemtype');
 
 (async () => {
     try {
         const client = new GlpiRestClient(config.apirest)
-        const ResetPasswordRequest = await client.resetPasswordRequest(config.user.email)
-        console.log(ResetPasswordRequest)
+        await client.initSessionByCredentials(config.user.name, config.user.password, config.appToken)
+        const Item = await client.updateItems(itemtype.UserEmail, null, [{id: 169, email: 'exam@email.com'}, {id: 170, email: 'exam2@email.com'}])
+        console.log(Item)
+        await client.killSession()
     } catch (err) {
         console.log(err)
     }

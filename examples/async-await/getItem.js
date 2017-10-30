@@ -24,14 +24,20 @@
 
 const GlpiRestClient = require('../../lib/restclient')
 const config = require('../../config.json')
-const itemtype = require('../../lib/itemtype');
+const itemtype = require('../../lib/itemtype')
+const GetItemQuery = require('../../lib/GetItemQuery');
 
 (async () => {
     try {
         const client = new GlpiRestClient(config.apirest)
+        let query = new GetItemQuery()
+        query.with_networkports = true
+        query.with_infocoms = true
+        query.with_contracts = true
+        query.with_documents = true
         await client.initSessionByCredentials(config.user.name, config.user.password, config.appToken)
-        const ItemDelete = await client.deleteItem(itemtype.UserEmail, null, [{id: 167}, {id: 168}])
-        console.log(ItemDelete)
+        const Item = await client.getItem(itemtype.User, 40, query.createQueryObject())
+        console.log(Item)
         await client.killSession()
     } catch (err) {
         console.log(err)

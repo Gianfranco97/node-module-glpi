@@ -24,16 +24,31 @@
 
 const GlpiRestClient = require('../../lib/restclient')
 const config = require('../../config.json')
-const itemtype = require('../../lib/itemtype');
+const itemtype = require('../../lib/itemtype')
+const GetItemQuery = require('../../lib/GetItemQuery')
 
-(async () => {
-    try {
-        const client = new GlpiRestClient(config.apirest)
-        await client.initSessionByCredentials(config.user.name, config.user.password, config.appToken)
-        const Item = await client.updateItem(itemtype.UserEmail, null, [{id: 169, email: 'exam@email.com'}, {id: 170, email: 'exam2@email.com'}])
-        console.log(Item)
-        await client.killSession()
-    } catch (err) {
+const client = new GlpiRestClient(config.apirest)
+
+let query = new GetItemQuery()
+query.with_networkports = true
+query.with_infocoms = true
+query.with_contracts = true
+query.with_documents = true
+
+client.initSessionByCredentials(config.user.name, config.user.password)
+    .then((res) => {
+        client.getItem(itemtype.User, 40, query.createQueryObject())
+            .then((res2) => {
+                console.log(res2)
+                client.killSession()
+                    .catch((err3) => {
+                        console.log(err3)
+                    })
+            })
+            .catch((err2) => {
+                console.log(err2)
+            })
+    })
+    .catch((err) => {
         console.log(err)
-    }
-})()
+    })

@@ -279,7 +279,7 @@ describe('getAllItems()', function () {
     }))
 })
 
-describe('getAnItem()', function () {
+describe('getItem()', function () {
     it('correct data sent to the request', sinonTest(() => {
         const client = new GlpiRestClient(config.apirest)
         const stub = sinon.stub(client, '_request')
@@ -298,7 +298,7 @@ describe('getAnItem()', function () {
         const bodyString = ''
 
         client.sessionToken = 'exampleUserToken'
-        client.getAnItem(itemtype.User, 2)
+        client.getItem(itemtype.User, 2)
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
@@ -327,7 +327,7 @@ describe('getSubItems()', function () {
     }))
 })
 
-describe('addItem()', function () {
+describe('addItems()', function () {
     it('correct data sent to the request', sinonTest(() => {
         const client = new GlpiRestClient(config.apirest)
         const stub = sinon.stub(client, '_request')
@@ -347,12 +347,12 @@ describe('addItem()', function () {
         const bodyString = '{"input":{"users_id":40,"email":"example@email.com"}}'
 
         client.sessionToken = 'exampleUserToken'
-        client.addItem(itemtype.UserEmail, {users_id: 40, email: 'example@email.com'})
+        client.addItems(itemtype.UserEmail, {users_id: 40, email: 'example@email.com'})
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
 
-describe('updateItem()', function () {
+describe('updateItems()', function () {
     it('correct data sent to the request', sinonTest(() => {
         const client = new GlpiRestClient(config.apirest)
         const stub = sinon.stub(client, '_request')
@@ -372,12 +372,12 @@ describe('updateItem()', function () {
         const bodyString = '{"input":{"id":160,"users_id":40,"email":"example2@email.com"}}'
 
         client.sessionToken = 'exampleUserToken'
-        client.updateItem(itemtype.UserEmail, null, {id: 160, users_id: 40, email: 'example2@email.com'})
+        client.updateItems(itemtype.UserEmail, null, {id: 160, users_id: 40, email: 'example2@email.com'})
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
 
-describe('deleteItem()', function () {
+describe('deleteItems()', function () {
     it('correct data sent to the request', sinonTest(() => {
         const client = new GlpiRestClient(config.apirest)
         const stub = sinon.stub(client, '_request')
@@ -397,7 +397,7 @@ describe('deleteItem()', function () {
         const bodyString = '{"input":{"id":160,"users_id":40,"email":"example2@email.com"}}'
 
         client.sessionToken = 'exampleUserToken'
-        client.deleteItem(itemtype.UserEmail, null, {id: 160, users_id: 40, email: 'example2@email.com'})
+        client.deleteItems(itemtype.UserEmail, null, {id: 160, users_id: 40, email: 'example2@email.com'})
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
@@ -452,7 +452,7 @@ describe('changeActiveEntities()', function () {
     }))
 })
 
-describe('resetPasswordRequest()', function () {
+describe('recoveryPassword()', function () {
     it('correct data sent to the request', sinonTest(() => {
         const client = new GlpiRestClient(config.apirest)
         const stub = sinon.stub(client, '_request')
@@ -471,7 +471,7 @@ describe('resetPasswordRequest()', function () {
         }
         const bodyString = '{"email":"exampleEmail"}'
 
-        client.resetPasswordRequest('exampleEmail')
+        client.recoveryPassword('exampleEmail')
         sinon.assert.calledWith(stub, requestData, bodyString)
     }))
 })
