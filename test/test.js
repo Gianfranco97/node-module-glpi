@@ -48,7 +48,6 @@ describe('initSessionByCredentials()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/initSession',
             method: 'GET',
             headers: {
@@ -71,7 +70,6 @@ describe('initSessionByUserToken()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/initSession',
             method: 'GET',
             headers: {
@@ -94,7 +92,6 @@ describe('killSession()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/killSession',
             method: 'GET',
             headers: {
@@ -112,13 +109,12 @@ describe('killSession()', function () {
 })
 
 describe('getMyProfiles()', function () {
-    it('get my profiles successfully', sinonTest(() => {
+    it('correct data sent to the request', sinonTest(() => {
         const client = new GlpiRestClient(config.apirest)
         const stub = sinon.stub(client, '_request')
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/getMyProfiles',
             method: 'GET',
             headers: {
@@ -142,7 +138,6 @@ describe('getActiveProfile()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/getActiveProfile',
             method: 'GET',
             headers: {
@@ -166,7 +161,6 @@ describe('getMyEntities()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/getMyEntities',
             method: 'GET',
             headers: {
@@ -190,7 +184,6 @@ describe('getActiveEntities()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/getActiveEntities',
             method: 'GET',
             headers: {
@@ -214,7 +207,6 @@ describe('getFullSession()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/getFullSession',
             method: 'GET',
             headers: {
@@ -238,7 +230,6 @@ describe('getGlpiConfig()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/getGlpiConfig',
             method: 'GET',
             headers: {
@@ -262,7 +253,6 @@ describe('getAllItems()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/User',
             method: 'GET',
             headers: {
@@ -286,7 +276,6 @@ describe('getItem()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/User/2',
             method: 'GET',
             headers: {
@@ -310,7 +299,6 @@ describe('getSubItems()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/User/40/UserEmail',
             method: 'GET',
             headers: {
@@ -334,7 +322,6 @@ describe('addItems()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/UserEmail',
             method: 'POST',
             headers: {
@@ -359,7 +346,6 @@ describe('updateItems()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/UserEmail',
             method: 'PUT',
             headers: {
@@ -384,7 +370,6 @@ describe('deleteItems()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/UserEmail',
             method: 'DELETE',
             headers: {
@@ -409,7 +394,6 @@ describe('changeActiveProfile()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/changeActiveProfile',
             method: 'POTS',
             headers: {
@@ -434,7 +418,6 @@ describe('changeActiveEntities()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/changeActiveEntities',
             method: 'POTS',
             headers: {
@@ -459,7 +442,6 @@ describe('recoveryPassword()', function () {
 
         const requestData = {
             hostname: 'dev.flyve.org',
-            port: 443,
             path: '/glpi/apirest.php/lostPassword',
             method: 'PUT',
             headers: {
